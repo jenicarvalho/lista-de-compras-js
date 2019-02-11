@@ -14,7 +14,7 @@
             display: block
         }
 
-        .clear-tasks-container {
+        .clear-lista-container {
             margin-top: 2em
         }
     </style>
@@ -29,31 +29,25 @@
                         <div class="card-content">
                             <span class="card-title">Lista de Compras</span>
                             <div class="row">
-                                <form id="task-form">
+                                <form id="lista-form">
                                     <div class="input-field col s12">
-                                        <input type="text" name="task" id="task">
-                                        <label for="task">Item de compra</label>
+                                        <input type="text" name="item" id="item">
+                                        <label for="item">Item de compra</label>
                                     </div>
                                     <input type="submit" value="Adicionar na lista" class="btn">
                                 </form>
                             </div>
                         </div>
                         <div class="card-action">
-                            <h5 id="task-title">Items da Lista</h5> 
-                            <label>
-                                <input type="checkbox" value="nescau" />
-                                <span>Nescau</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" value="tomate" />
-                                <span>Tomate</span>
-                            </label>
-                            <label>
-                                <input type="checkbox" value="ovo"/>
-                                <span>Ovo</span>
-                            </label>
-                            <div class="clear-tasks-container">
-                                <a href="#" class="clear-tasks btn black" >Limpar Lista</a>
+                            <h5 id="lista-title">Items da Lista</h5> 
+                            <div id="lista-items">
+                                <label>
+                                    <input type="checkbox" value="nescau" />
+                                    <span>Nescau</span>
+                                </label>
+                            </div>
+                            <div class="clear-lista-container">
+                                <a href="#" class="clear-lista btn black" >Limpar Lista</a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +58,7 @@
     </main>
 
 
-     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
