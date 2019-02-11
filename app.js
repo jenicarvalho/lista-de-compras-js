@@ -14,10 +14,17 @@ function loadEventListeners() {
     //add item event
     form.addEventListener('submit', addItemToList); 
 
+    //clear all items
+    clearBtn.addEventListener('click', clearList);
+
 }
 
 function addItemToList(e) {
     e.preventDefault();
+
+    if(itemList.value === '') {
+        alert('Adicione um item');
+    }
 
     //create label (wrapper)
     const item = document.createElement('label');
@@ -43,4 +50,10 @@ function addItemToList(e) {
 
     // clear input
     itemList.value = '';
+}
+
+function clearList() {
+    if(confirm('Tem certeza?')) {
+        list.textContent = '';
+    }
 }
