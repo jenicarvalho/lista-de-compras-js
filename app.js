@@ -48,12 +48,30 @@ function addItemToList(e) {
     //append item tolist
    list.appendChild(item); 
 
+   addListToLocalStorage(itemList.value);
+   
     // clear input
     itemList.value = '';
+
 }
 
 function clearList() {
     if(confirm('Tem certeza?')) {
         list.textContent = '';
     }
+}
+
+function addListToLocalStorage(item) { 
+
+    let items;
+    if(localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+
+    items.push(item);
+
+    localStorage.setItem('items', JSON.stringify(items));
+
 }
