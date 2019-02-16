@@ -10,12 +10,30 @@ loadEventListeners();
 
 //Load all event Listeners
 function loadEventListeners() {
+
+    document.addEventListener('DOMContentLoaded', getList);
     
     //add item event
     form.addEventListener('submit', addItemToList); 
 
     //clear all items
     clearBtn.addEventListener('click', clearList);
+
+}
+
+function getList() {
+
+    let items;
+    if(localStorage.getItem('items') === null) {
+        items = [];
+    } else {
+        items = JSON.parse(localStorage.getItem('items'));
+    } 
+
+    items.forEach(function(item) {  
+        //build list
+        buildList(item);
+    });
 
 }
 
@@ -26,33 +44,38 @@ function addItemToList(e) {
         alert('Adicione um item');
     }
 
-    //create label (wrapper)
-    const item = document.createElement('label');
+    //build list
+    buildList(itemList.value);
 
-    //create input checkbox
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-
-    //append checkbox
-    item.appendChild(checkbox);
-
-    //create span
-    const span = document.createElement('span');
-    
-    //add content to span
-    span.textContent = itemList.value;
-
-    //append span
-    item.appendChild(span);   
-
-    //append item tolist
-   list.appendChild(item); 
-
-   addListToLocalStorage(itemList.value);
+    addListToLocalStorage(itemList.value);
    
     // clear input
     itemList.value = '';
 
+}
+
+function buildList(itemValue) {
+        //create label (wrapper)
+        const item = document.createElement('label');
+
+        //create input checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+    
+        //append checkbox
+        item.appendChild(checkbox);
+    
+        //create span
+        const span = document.createElement('span');
+        
+        //add content to span
+        span.textContent = itemValue;
+    
+        //append span
+        item.appendChild(span);   
+    
+        //append item tolist
+       list.appendChild(item); 
 }
 
 function clearList() {
