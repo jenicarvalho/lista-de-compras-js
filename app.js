@@ -19,6 +19,21 @@ function loadEventListeners() {
     //clear all items
     clearBtn.addEventListener('click', clearList);
 
+    //remove item
+    list.addEventListener('click', removeItem);  
+
+}
+
+function removeItem(e) {
+
+    let item = e.target; 
+    
+    if(item.classList.contains('done')) {
+        item.classList.remove('done');
+    } else {
+        item.classList.add('done');
+    }
+
 }
 
 function getList() {
@@ -42,15 +57,16 @@ function addItemToList(e) {
 
     if(itemList.value === '') {
         alert('Adicione um item');
+    } else {
+
+        //build list
+        buildList(itemList.value);
+
+        itemToLocalStorage(itemList.value, false);
+
+        // clear input
+        itemList.value = '';
     }
-
-    //build list
-    buildList(itemList.value);
-
-    addListToLocalStorage(itemList.value);
-   
-    // clear input
-    itemList.value = '';
 
 }
 
@@ -82,9 +98,11 @@ function clearList() {
     if(confirm('Tem certeza?')) {
         list.textContent = '';
     }
+    
+    localStorage.clear();
 }
 
-function addListToLocalStorage(item) { 
+function itemToLocalStorage(item, deleteItem = false) { 
 
     let items;
     if(localStorage.getItem('items') === null) {
@@ -93,8 +111,17 @@ function addListToLocalStorage(item) {
         items = JSON.parse(localStorage.getItem('items'));
     }
 
-    items.push(item);
+
+    if(!deleteItem) { 
+        items.push(item); 
+    } else {
+        items.forEach(function(item, index) { 
+            if(item.textContent === item) { 
+                items.splice(index, 1); 
+            }
+        });
+    }
 
     localStorage.setItem('items', JSON.stringify(items));
 
-}
+} 
