@@ -5,3 +5,7 @@ label {
 .clear-lista-container {
     margin-top: 2em
 }
+
+.done {
+    text-decoration: line-through;
+}
